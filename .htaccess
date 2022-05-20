@@ -1,0 +1,14 @@
+RewriteEngine On
+
+RewriteCond %{HTTPS} !=on
+RewriteRule ^/?(.*) https://%{SERVER_NAME}/$1 [R,L]
+
+RewriteCond %{HTTP_HOST} ^www.cms.ww.net.ru$ [NC]
+RewriteRule ^(.*)$ https://cms.ww.net.ru/$1 [R=301,L]
+
+RewriteRule ^index\.php$ https://cms.ww.net.ru/ [L,R=301]
+
+RewriteCond %{REQUEST_URI} ^(.*)/index.php$
+RewriteRule ^(.*)$ %1/ [R=301,L]
+
+ErrorDocument 404 https://cms.ww.net.ru/404.php
